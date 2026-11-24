@@ -1,0 +1,350 @@
+/* ==========================================================
+   estilos.css — Diseño café, dorado y crema (con toque aqua
+   para el Manantial). Lo comparten las 3 páginas.
+   ========================================================== */
+
+/* ---------- Variables de color ---------- */
+:root {
+  --cafe-oscuro: #3b1a0e;   /* menú y pie de página */
+  --cafe: #6b2f17;          /* textos fuertes */
+  --terracota: #b5532b;     /* acentos de barro */
+  --dorado: #e0a83a;        /* botones */
+  --dorado-claro: #f3c86b;  /* hover de botones */
+  --crema: #fbf1df;         /* fondo general */
+  --crema-oscuro: #f3e2c4;  /* fondo de tarjetas */
+  --aqua: #1fa5d8;          /* Manantial */
+  --aqua-claro: #8fdcf5;
+  --sombra: 0 8px 24px rgba(59, 26, 14, .18);
+  --radio: 18px;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Nunito", sans-serif;
+  background: var(--crema);
+  color: var(--cafe-oscuro);
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: "Fraunces", serif; color: var(--cafe); line-height: 1.2; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.contenedor { width: min(1150px, 92%); margin: 0 auto; }
+
+/* ---------- Menú (navegación fija) ---------- */
+.menu {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--cafe-oscuro);
+  box-shadow: 0 3px 12px rgba(0,0,0,.3);
+}
+.menu .contenedor { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo {
+  font-family: "Fraunces", serif; font-size: 1.8rem;
+  color: var(--crema); text-decoration: none; display: flex; align-items: center; gap: .5rem;
+}
+.logo b { font-weight: 600; }
+.logo span { color: var(--dorado); }
+.tarjeta .boton { align-self: flex-start; }
+.menu ul { list-style: none; display: flex; gap: 2rem; }
+.menu ul a {
+  color: var(--crema); text-decoration: none; font-weight: 600;
+  padding-bottom: 4px; border-bottom: 3px solid transparent; transition: .2s;
+}
+.menu ul a:hover, .menu ul a.activo { border-color: var(--dorado); color: var(--dorado-claro); }
+.hamburguesa { display: none; background: none; border: 0; color: var(--crema); font-size: 1.8rem; cursor: pointer; }
+
+/* ---------- Banner principal ---------- */
+.hero {
+  min-height: 78vh; display: grid; place-items: center; text-align: center; color: var(--crema);
+  /* Si existe img/valle.jpg se usa la foto; si no, se ve el degradado */
+  background:
+    linear-gradient(rgba(59,26,14,.45), rgba(59,26,14,.65)),
+    url("../img/valle.jpg") center/cover,
+    linear-gradient(180deg, #e8a86b 0%, #c4693a 45%, #7a3519 100%);
+  position: relative; overflow: hidden;
+}
+.hero::after { /* Montañas dibujadas con CSS (adorno si no hay foto) */
+  content: ""; position: absolute; inset: auto 0 0 0; height: 35%;
+  background: linear-gradient(160deg, transparent 40%, rgba(59,26,14,.55) 40.5%),
+              linear-gradient(200deg, transparent 45%, rgba(59,26,14,.4) 45.5%);
+  pointer-events: none;
+}
+.hero-texto { position: relative; z-index: 1; padding: 2rem; }
+.hero p.sub { font-family: "Fraunces", serif; font-size: 1.8rem; }
+.hero h1 { color: var(--crema); font-size: clamp(3rem, 9vw, 6.5rem); text-shadow: 0 4px 18px rgba(0,0,0,.4); }
+.hero p.desc { max-width: 560px; margin: 1rem auto 2rem; font-size: 1.1rem; }
+.hero.chico { min-height: 48vh; }
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-block; background: var(--dorado); color: var(--cafe-oscuro);
+  padding: .8rem 2rem; border-radius: 999px; font-weight: 800; text-decoration: none;
+  border: 0; cursor: pointer; font-size: 1rem; box-shadow: var(--sombra); transition: .2s;
+}
+.boton:hover { background: var(--dorado-claro); transform: translateY(-2px); }
+.boton.claro { background: var(--crema); }
+.boton.aqua { background: linear-gradient(180deg, #ffffff, var(--aqua-claro)); color: #0b4a66; }
+
+/* ---------- Secciones ---------- */
+section { padding: 4.5rem 0; }
+.titulo-seccion { text-align: center; margin-bottom: 2.5rem; }
+.titulo-seccion h2 { font-size: 2.4rem; }
+.titulo-seccion p { color: var(--terracota); font-weight: 700; }
+.adorno { color: var(--dorado); font-size: 1.4rem; letter-spacing: .5rem; }
+
+/* ---------- Tarjetas del Inicio ---------- */
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; }
+.tarjeta {
+  min-height: 320px; border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; color: var(--crema);
+  transition: transform .25s;
+}
+.tarjeta:hover { transform: translateY(-6px); }
+.tarjeta h3 { color: var(--crema); font-size: 2.2rem; }
+.tarjeta p { margin: .4rem 0 1.2rem; }
+.tarjeta .icono { font-size: 4rem; margin-bottom: auto; }
+.tarjeta.mole {
+  background: linear-gradient(rgba(107,47,23,.2), rgba(59,26,14,.85)), url("../img/mole.jpg") center/cover,
+              linear-gradient(135deg, #b5532b, #5a230f);
+}
+.tarjeta.manantial { /* Toque Frutiger Aero: burbujas + brillo */
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.55) 0 8px, transparent 9px),
+    radial-gradient(circle at 70% 35%, rgba(255,255,255,.45) 0 5px, transparent 6px),
+    radial-gradient(circle at 88% 50%, rgba(255,255,255,.4) 0 12px, transparent 13px),
+    linear-gradient(rgba(10,90,140,.15), rgba(6,60,100,.8)), url("../img/manantial.jpg") center/cover,
+    linear-gradient(135deg, #8fdcf5, #1fa5d8 55%, #0b5f8a);
+}
+
+/* ---------- Banner del minijuego ---------- */
+.banner-juego {
+  display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 2rem;
+  background: var(--crema-oscuro); border-radius: var(--radio); padding: 2.5rem; box-shadow: var(--sombra);
+  border: 2px dashed var(--terracota);
+}
+.banner-juego .olla { font-size: 7rem; }
+.banner-juego h2 { font-size: 2.6rem; }
+
+/* ---------- Minijuego ---------- */
+.juego {
+  background: #fff8ec; border-radius: var(--radio); padding: 2rem; margin-top: 2rem;
+  box-shadow: var(--sombra); display: none; /* se muestra al dar "Jugar" */
+}
+.juego.visible { display: block; }
+.juego-encabezado { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+.progreso { height: 12px; background: var(--crema-oscuro); border-radius: 999px; overflow: hidden; margin-bottom: 1.5rem; }
+.progreso div { height: 100%; width: 0; background: linear-gradient(90deg, var(--terracota), var(--dorado)); transition: width .4s; }
+.opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+.opcion {
+  background: var(--crema); border: 2px solid var(--crema-oscuro); border-radius: 14px; padding: 1rem;
+  font-size: 1rem; font-weight: 700; cursor: pointer; color: var(--cafe-oscuro); transition: .2s; font-family: inherit;
+}
+.opcion span { display: block; font-size: 2.4rem; }
+.opcion:hover { border-color: var(--dorado); transform: scale(1.03); }
+.opcion.bien { background: #d9f2d0; border-color: #4caf50; }
+.opcion.mal { background: #f8d4cc; border-color: #d9534f; animation: temblor .3s; }
+.opcion:disabled { cursor: default; }
+.olla-juego { text-align: center; font-size: 4rem; margin: 1rem 0; }
+.olla-juego small { display: block; font-size: 1rem; color: var(--terracota); font-weight: 700; }
+.mensaje { text-align: center; font-weight: 700; min-height: 1.6em; margin-top: 1rem; color: var(--terracota); }
+.resultado { text-align: center; }
+.resultado .estrellas { font-size: 3rem; margin: 1rem 0; }
+.resultado .dato { background: #e6f7fd; border-radius: 12px; padding: 1rem; margin: 1rem auto; max-width: 520px; }
+.resultado .botones { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+@keyframes temblor { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+/* ---------- Próximos eventos ---------- */
+.eventos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+.evento { background: #fff8ec; border-left: 6px solid var(--dorado); border-radius: 12px; padding: 1.3rem; box-shadow: var(--sombra); }
+.evento .fecha { color: var(--terracota); font-weight: 800; font-size: .9rem; text-transform: uppercase; }
+
+/* ---------- Páginas internas: bloques de contenido ---------- */
+.indice { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.5rem; }
+.indice a { background: rgba(251,241,223,.9); color: var(--cafe); padding: .5rem 1.1rem; border-radius: 999px; text-decoration: none; font-weight: 700; }
+.bloque { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.bloque.invertido .bloque-img { order: 2; }
+.bloque h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+.bloque p { margin-bottom: 1rem; }
+.bloque-img {
+  min-height: 300px; border-radius: var(--radio); box-shadow: var(--sombra);
+  display: grid; place-items: center; font-size: 6rem;
+  background: linear-gradient(135deg, var(--terracota), var(--cafe));
+}
+.bloque-img.aqua { background: linear-gradient(135deg, var(--aqua-claro), var(--aqua) 60%, #0b5f8a); }
+.fondo-alterno { background: var(--crema-oscuro); }
+.datos-clave { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.dato-clave { background: #fff8ec; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: var(--sombra); }
+.dato-clave b { display: block; font-size: 1.6rem; color: var(--terracota); font-family: "Fraunces", serif; }
+.lista-pasos { padding-left: 1.3rem; }
+.lista-pasos li { margin-bottom: .5rem; }
+
+/* ---------- ¿Controversial? ---------- */
+.posturas { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+.postura { border-radius: var(--radio); padding: 1.8rem; box-shadow: var(--sombra); }
+.postura h3 { margin-bottom: .8rem; }
+.postura ul { padding-left: 1.2rem; }
+.postura.favor { background: #eef6e6; border-top: 6px solid #6aa84f; }
+.postura.contra { background: #fbe9e4; border-top: 6px solid #cc5a3d; }
+.encuesta { background: #fff8ec; border-radius: var(--radio); padding: 2rem; text-align: center; box-shadow: var(--sombra); }
+.encuesta .botones { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0; }
+.barra-voto { background: var(--crema-oscuro); border-radius: 999px; height: 26px; margin: .5rem 0; overflow: hidden; text-align: left; }
+.barra-voto div { height: 100%; color: #fff; font-weight: 800; font-size: .85rem; padding: 0 .8rem; display: flex; align-items: center; white-space: nowrap; transition: width .5s; }
+
+/* ---------- Galería ---------- */
+.galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.galeria div { aspect-ratio: 4/3; border-radius: 14px; display: grid; place-items: center; font-size: 3.5rem; color: #fff; box-shadow: var(--sombra); }
+
+/* ---------- Mapa ---------- */
+.mapa { width: 100%; height: 340px; border: 0; border-radius: var(--radio); box-shadow: var(--sombra); }
+
+/* ---------- Formulario de contacto ---------- */
+.formulario { display: grid; gap: 1rem; max-width: 560px; margin: 0 auto; }
+.formulario input, .formulario textarea {
+  padding: .9rem 1rem; border-radius: 12px; border: 2px solid var(--crema-oscuro);
+  font-family: inherit; font-size: 1rem; background: #fff;
+}
+.formulario input:focus, .formulario textarea:focus { outline: none; border-color: var(--dorado); }
+
+/* ---------- Pie de página ---------- */
+footer { background: var(--cafe-oscuro); color: var(--crema); padding: 3rem 0 1.5rem; }
+footer .contenedor { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+footer h4 { color: var(--dorado); margin-bottom: .6rem; font-family: "Fraunces", serif; font-size: 1.2rem; }
+footer ul { list-style: none; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--dorado-claro); }
+.redes { display: flex; gap: .8rem; font-size: 1.5rem; }
+.creditos { text-align: center; margin-top: 2rem; font-size: .85rem; opacity: .7; }
+
+/* ---------- Celular ---------- */
+@media (max-width: 760px) {
+  .hamburguesa { display: block; }
+  .menu ul {
+    display: none; position: absolute; top: 72px; left: 0; right: 0;
+    flex-direction: column; gap: 0; background: var(--cafe-oscuro); padding: 1rem 0;
+  }
+  .menu ul.abierto { display: flex; }
+  .menu ul a { display: block; padding: .8rem 1.5rem; }
+  .banner-juego, .bloque, .posturas { grid-template-columns: 1fr; }
+  .banner-juego { text-align: center; }
+  .bloque.invertido .bloque-img { order: 0; }
+}
+
+/* ==========================================================
+   AJUSTES PARA PARECERSE AL MOCKUP 🎨
+   (van al final para que reemplacen lo de arriba)
+   ========================================================== */
+
+/* ---------- Menú con papel picado en las esquinas ---------- */
+.menu {
+  background:
+    url("../img/esquina-izq.png") left top / auto 100% no-repeat,
+    url("../img/esquina-der.png") right top / auto 100% no-repeat,
+    #4a1d0f;
+}
+.menu .contenedor { height: 88px; }
+.logo { gap: .6rem; font-size: 2.2rem; }
+.logo img { height: 52px; }                 /* flor del logo */
+.logo b { font-weight: 500; color: #fbe6c2; }
+.menu ul { gap: 0; }
+.menu ul li + li { border-left: 1px solid rgba(251,230,194,.5); } /* separadores | */
+.menu ul a { padding: .3rem 1.8rem; font-size: 1.05rem; }
+.menu ul a.activo { color: #fff; border-color: var(--dorado); }
+
+/* ---------- Portada (banner con foto del valle) ---------- */
+.hero.portada {
+  min-height: 520px;
+  background:
+    radial-gradient(ellipse 45% 55% at 50% 52%, rgba(60,28,12,.6), rgba(60,28,12,.15) 70%, transparent),
+    url("../img/valle.jpg") center / cover,
+    #a8714a;
+}
+.hero.portada::after { /* orilla de "encaje" abajo, como en el diseño */
+  inset: auto 0 -1px 0; height: 22px;
+  /* filita de "bolitas" color crema, como el encaje del diseño */
+  background:
+    radial-gradient(circle at 11px 22px, var(--crema) 10px, transparent 11px) 0 0 / 22px 22px repeat-x,
+    linear-gradient(transparent 60%, var(--crema) 60%);
+}
+.hero.portada .sub { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1; color: #fbe6c2; }
+.hero.portada h1 { color: #fbe6c2; font-weight: 700; }
+.rayos { color: #f3d9a8; font-size: .5em; vertical-align: middle; }
+.hero.portada .adorno { color: var(--dorado); letter-spacing: 0; margin: .2rem 0 1.6rem; }
+.boton { box-shadow: 0 4px 0 #b9832a, 0 8px 18px rgba(0,0,0,.25); }  /* botón tipo "gel" */
+.hero.portada .boton { font-size: 1.4rem; padding: .7rem 2.6rem; }
+
+/* ---------- Tarjetas con foto ---------- */
+.seccion-tarjetas { padding: 2.2rem 0 1.5rem; }
+.tarjetas { gap: 1.3rem; }
+.tarjeta {
+  display: grid; grid-template-columns: 1.1fr 1fr; padding: 0; min-height: 340px; border-radius: 14px;
+}
+.tarjeta-foto { background-size: cover; background-position: center; }
+.tarjeta-texto { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 1.5rem; }
+.tarjeta h3 { font-size: clamp(2rem, 3.4vw, 2.9rem); font-weight: 500; color: #fbe6c2; }
+.tarjeta .adorno { margin: .3rem 0 1rem; letter-spacing: 0; }
+.tarjeta .boton { align-self: center; padding: .55rem 1.6rem; box-shadow: 0 4px 10px rgba(0,0,0,.2); }
+.tarjeta.mole { background: linear-gradient(120deg, #8a3518, #6b2a12); }
+.tarjeta.mole .tarjeta-foto {
+  background-image: url("../img/mole.jpg");
+  -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent); mask-image: linear-gradient(90deg, #000 70%, transparent);
+}
+.tarjeta.manantial { grid-template-columns: 1fr 1fr; }
+.tarjeta.manantial .tarjeta-texto { color: #fff; }
+.tarjeta.manantial h3 { color: #fff; text-shadow: 0 2px 8px rgba(0,60,110,.5); }
+.tarjeta.manantial .tarjeta-foto {
+  background-image: url("../img/manantial.jpg");
+  -webkit-mask-image: linear-gradient(270deg, #000 70%, transparent); mask-image: linear-gradient(270deg, #000 70%, transparent);
+}
+
+/* ---------- Banner del minijuego ---------- */
+.seccion-juego { padding: 1rem 0 3rem; }
+.banner-juego {
+  grid-template-columns: 1.3fr 1.3fr .6fr; gap: 0; padding: 0; overflow: hidden;
+  border: 0; border-radius: 14px; min-height: 280px;
+  background: radial-gradient(circle at 70% 50%, #fff3dc, #f6dfb8);
+}
+.banner-olla { background: url("../img/olla.jpg") center / cover; align-self: stretch;
+  -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); }
+.banner-texto { text-align: center; padding: 1.5rem; }
+.banner-texto h2 { font-size: clamp(2.6rem, 5vw, 4rem); color: #4a1d0f; font-weight: 700; }
+.banner-texto p { font-size: 1.6rem; margin: 0 0 1.2rem; color: #4a1d0f; }
+.banner-texto .boton { font-size: 1.5rem; padding: .7rem 3rem; }
+.banner-iglesia { background: url("../img/iglesia.jpg") right bottom / cover; align-self: stretch;
+  -webkit-mask-image: linear-gradient(270deg, #000 70%, transparent); mask-image: linear-gradient(270deg, #000 70%, transparent); }
+
+/* ---------- Pie de página en una sola fila ---------- */
+footer { padding: 0; background: #4a1d0f; }
+.pie { display: flex !important; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; padding: 1.8rem 0; }
+.pie > * + * { border-left: 1px solid rgba(251,230,194,.35); padding-left: 1.8rem; }
+.pie .logo { font-size: 1.9rem; }
+.pie-links { display: flex; gap: 0; }
+.pie-links li + li { border-left: 1px solid rgba(251,230,194,.45); }
+.pie-links a { padding: 0 1rem; font-size: .95rem; }
+.redes { gap: .9rem; }
+.redes a { width: 42px; height: 42px; border-radius: 50%; background: #fbe6c2; display: grid; place-items: center; transition: .2s; }
+.redes a:hover { background: var(--dorado); }
+.redes svg { width: 24px; height: 24px; fill: #4a1d0f; }
+.pie-contacto { display: flex; flex-direction: column; font-size: .9rem; }
+.franja { height: 48px; background: url("../img/franja.png") left center / auto 100% repeat-x; }
+
+/* ---------- Celular ---------- */
+@media (max-width: 760px) {
+  .menu ul li + li { border-left: 0; }
+  .tarjeta, .tarjeta.manantial { grid-template-columns: 1fr; }
+  .tarjeta-foto { min-height: 200px; -webkit-mask-image: none !important; mask-image: none !important; }
+  .tarjeta.manantial .tarjeta-foto { order: -1; }
+  .banner-juego { grid-template-columns: 1fr; }
+  .banner-olla { min-height: 200px; -webkit-mask-image: none; mask-image: none; }
+  .banner-iglesia { display: none; }
+  .pie { flex-direction: column; text-align: center; }
+  .pie > * + * { border-left: 0; padding-left: 0; }
+}
+
+/* Banners de las páginas internas sin el triángulo de "montañas" */
+.hero.chico::after { display: none; }
+/* Bloques con foto en lugar de emoji */
+.bloque-img.foto { background-size: cover; background-position: center; font-size: 0; }
+
+/* Galería con fotos reales */
+.galeria .foto { background-size: cover; background-position: center; }
